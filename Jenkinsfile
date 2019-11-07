@@ -8,7 +8,6 @@ pipeline {
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
-        
         stage('DeployToStaging') {
             when {
                 branch 'master'
@@ -24,7 +23,7 @@ pipeline {
                                 sshCredentials: [
                                     username: "$USERNAME",
                                     encryptedPassphrase: "$USERPASS"
-                                ],
+                                ], 
                                 transfers: [
                                     sshTransfer(
                                         sourceFiles: 'dist/trainSchedule.zip',
@@ -37,8 +36,9 @@ pipeline {
                         ]
                     )
                 }
-            }        
-             stage('DeployToProduction') {
+            }
+        }
+        stage('DeployToProduction') {
             when {
                 branch 'master'
             }
@@ -55,7 +55,7 @@ pipeline {
                                 sshCredentials: [
                                     username: "$USERNAME",
                                     encryptedPassphrase: "$USERPASS"
-                                ],
+                                ], 
                                 transfers: [
                                     sshTransfer(
                                         sourceFiles: 'dist/trainSchedule.zip',
@@ -69,7 +69,6 @@ pipeline {
                     )
                 }
             }
-        }
         }
     }
 }
